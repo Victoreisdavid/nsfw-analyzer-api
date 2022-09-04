@@ -1,7 +1,6 @@
 import fastify from "fastify";
 import fastify_static from "@fastify/static";
 import multipart from "@fastify/multipart";
-import nsfw from "nsfwjs";
 import cors from "@fastify/cors";
 
 import { dirname, resolve } from 'path';
@@ -28,8 +27,6 @@ app.register(fastify_static, {
 app.register(cors, {
     origin: false
 })
-
-let _model;
 
 app.get("/", async (req, res) => {
     return res.sendFile("home.html", { cacheControl: false })
@@ -60,16 +57,12 @@ app.post("/api/predict", async (req, res) => {
         return res.status(400).type("application/json").send({ error: "unknown image" })
     }
 
-    const predictions = await predict(_model, buffer)
+    const predictions = await predict(buffer)
 
     res.type("application/json").send(predictions)
 })
 
 const start = async () => {
-    console.log("Carregando modelo....")
-    _model = await nsfw.load("file://model/", { type: "graph" })
-
-    console.log("Modelo carregado. Iniciando servidor")
     app.listen({
         port: process.env.PORT || 3030,
         host: "0.0.0.0"

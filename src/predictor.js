@@ -4,7 +4,7 @@ import jpeg from "jpeg-js";
 import sharp from "sharp";
 import { fileTypeFromBuffer } from "file-type";
 
-tf.enableProdMode()
+let model;
 
 /**
  * Converte imagens para JPG usando o sharp
@@ -57,10 +57,17 @@ function parseClassify(classify) {
  * @param {String} mimetype Tipo da imagem
  * @returns {Promise<Object>} Classificações da imagem
  */
-async function predict(model, image) {
+async function predict(image) {
     const mimetype = await fileTypeFromBuffer(image)
     const img = mimetype.mime == "image/jpeg" ? await convert(image) : await convert(await convertImage(image)) 
     return parseClassify(await model.classify(img))
 }
+
+const start = async () => {
+    console.log("Carregando modelo....")
+    model = await nsfw.load("file://model/", { type: "graph" })
+    console.log("Modelo carregado.")
+}
+start()
 
 export default predict

@@ -23,6 +23,7 @@
     "@fastify/multipart": "^7.1.1",
     "@fastify/static": "^6.5.0",
     "@tensorflow/tfjs-node": "^3.20.0",
+    "dotenv": "^16.0.2",
     "fastify": "^4.5.3",
     "fastify-multer": "^2.0.3",
     "file-type": "^18.0.0",
