@@ -1,5 +1,4 @@
 import cluster from "cluster";
-import nsfw from "nsfwjs";
 import tf from "@tensorflow/tfjs-node";
 import os from "os";
 import dotenv from "dotenv";
