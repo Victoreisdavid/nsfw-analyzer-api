@@ -8,28 +8,68 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/static/style.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js" integrity="sha512-gU7kztaQEl7SHJyraPfZLQCNnrKdaQi5ndOyt4L4UPL/FHDd/uB9Je6KDARIqwnNNE27hnqoWLBq+Kpe4iHfeQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/atom-one-dark.min.css" integrity="sha512-Jk4AqjWsdSzSWCSuQTfYRIF84Rq/eV0G2+tu07byYwHcbTGfdmLrHjUSwvzp5HvbiqK4ibmNwdcG49Y5RGYPTg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
         <nav>
             <div id="logo">
                 NSFW <span id="orange">Analyzer</span>
             </div>
-            <a href="/how-to-use">Como usar a API</a>
+            <a href="/">Página inicial</a>
         </nav>
-        <header id="header">
-            <h1>NSFW Analyzer</h1>
-            <p>Usar a API é simples e rápido.</p>
-        </header>
-        <main>
-            <h1>Como fazer as requests?</h1>
-            <p>As requests devem ser feita com o método POST em <strong>/api/predict</strong> enviando um <strong>multipart/form-data</strong>.</p>
+        <header id="h-header">
+            <h2>Como usar a api do NSFW Analyzer?</h2>
+            <p>O uso da API é bastante simples e <strong>gratuito</strong>.</p>
+        </header> <br />
+        <main id="h-main">
             <ul>
-                <li>O formato de arquivo deve ser <strong>image/jpeg</strong> ou <strong>image/png</strong></li>
-                <li>O nome do field da imagem DEVE SER <strong>image</strong></li>
-                <li>Não pode exceder 10MB</li>
+                <li>As requests devem ser feitas com o método POST para <span class="dark-text">/api/predict</span>.</li>
+                <li>A imagem devem ser enviada em um <span class="dark-text">multipart/form-data</span>.</li>
+                <li>O tamanho não pode exceder 10MB.</li>
+                <li>Apenas uma imagem por request.</li>
+                <li>Os formatos suportados, por enquanto são: <span class="dark-text">image/jpeg</span>, <span class="dark-text">image/png</span>.</li>
             </ul>
-            <h1>Suporte a gifs...?</h1>
-            <p>Por enquanto não há suporte para gifs, mas futuramente pode ter.</p>
+            <br />
+            <h2>Exemplo</h2>
+            <pre>
+                <code class="language-javascript">
+                    async function request() {
+                        const image = await fetch("<span class="url"></span>/static/nsfwjs_logo.jpg") // &lt;-- logo do NSFWJS, usado para analisar as imagens
+                        const imageblob = await image.blob() // &lt;-- no nodejs isso seria um Buffer
+
+                        const formdata = new FormData()
+                        formdata.append("file", imageblob)
+                        
+                        const res = await fetch("<span class="url"></span>/api/predict", {
+                            method: "POST",
+                            body: formdata
+                        })
+                        console.log(await res.json())
+                    }
+        
+                    request()
+                </code>
+            </pre>
         </main>
+        <script>
+            document.querySelectorAll(".url").forEach(tag => tag.textContent = "https://" + window.location.href.split("/")[2])
+            hljs.highlightAll()
+            async function request() {
+                const image = await fetch("/static/nsfwjs_logo.jpg")
+                const imageblob = await image.blob()
+
+                const formdata = new FormData()
+                formdata.append("file", imageblob)
+
+                const res = await fetch("/api/predict", {
+                    method: "POST",
+                    body: formdata
+                })
+                console.log(await res.json())
+            }
+
+            request()
+        </script>
     </body>
 </html>

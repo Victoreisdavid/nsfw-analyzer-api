@@ -32,7 +32,7 @@
             const image = document.querySelector("input[type=file]").files[0]
             const form = new FormData()
 
-            form.append("file", image, "form")
+            form.append("file", image)
 
             fetch("/api/predict", {
                 method: "POST",

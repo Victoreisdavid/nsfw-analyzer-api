@@ -1,15 +1,17 @@
 import fastify from "fastify";
+import fastify_static from "@fastify/static";
 import multipart from "@fastify/multipart";
 import nsfw from "nsfwjs";
-import fs from "fs";
+import cors from "@fastify/cors";
+
+import { dirname, resolve } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 import predict from "./predictor.js";
 
 const validtypes = ["image/jpeg", "image/png"]
-
-const css = fs.readFileSync("./src/static/style.css")
-const home = fs.readFileSync("./src/static/home.html")
-const how_to_use = fs.readFileSync("./src/static/how-to-use.html")
 
 const app = fastify()
 app.register(multipart, {
@@ -18,18 +20,31 @@ app.register(multipart, {
     }
 })
 
+app.register(fastify_static, {
+    root: resolve(__dirname, "static"),
+    prefix: "/"
+})
+
+app.register(cors, {
+    origin: false
+})
+
 let _model;
 
 app.get("/", async (req, res) => {
-    res.type("text/html").send(home)
+    return res.sendFile("home.html", { cacheControl: false })
 })
 
 app.get("/how-to-use", async (req, res) => {
-    res.type("text/html").send(how_to_use)
+    return res.sendFile("how-to-use.html")
 })
 
 app.get("/static/style.css", async (req, res) => {
-    res.type("text/css").send(css)
+    return res.sendFile("style.css")
+})
+
+app.get("/static/nsfwjs_logo.jpg", async (req, res) => {
+    return res.sendFile("nsfwjs_logo.jpg")
 })
 
 app.post("/api/predict", async (req, res) => {
