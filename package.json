@@ -1,0 +1,31 @@
+{
+  "name": "nsfw-analyzer-api",
+  "version": "1.0.0",
+  "description": "Api do NSFW Analyzer",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Victoreisdavid/nsfw-analyzer-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Victoreisdavid/nsfw-analyzer-api/issues"
+  },
+  "homepage": "https://github.com/Victoreisdavid/nsfw-analyzer-api#readme",
+  "dependencies": {
+    "@fastify/multipart": "^7.1.1",
+    "@tensorflow/tfjs-node": "^3.20.0",
+    "fastify": "^4.5.3",
+    "fastify-multer": "^2.0.3",
+    "file-type": "^18.0.0",
+    "jpeg-js": "^0.4.4",
+    "nsfwjs": "^2.4.2",
+    "sharp": "^0.30.7"
+  }
+}

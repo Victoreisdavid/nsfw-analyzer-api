@@ -1,0 +1,92 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --dark-color: rgb(46, 46, 46);
+    --mid-color: #333;
+
+    --orange: rgb(214, 153, 21);
+
+    --light-color: #ececec;
+    --light-color-nav: #d8d7d7;
+
+    --font: 'Fira Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font);
+}
+
+body {
+    background-color: var(--mid-color);
+    color: var(--light-color);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10vh;
+    width: 100%;
+    background-color: var(--dark-color);
+}
+
+nav #logo {
+    background-color: rgb(26, 25, 25);
+    padding: 4px 7px 7px 4px;
+    font-size: 2.7em;
+}
+
+nav #logo #orange {
+    font-size: 0.9em;
+    padding: 0 4px;
+    background-color: rgb(230, 144, 15);
+    color: var(--light-color)
+}
+
+nav a {
+    color: var(--light-color-nav);
+    font-size: 1.35em;
+    margin-left: 20px;
+    transform: translateY(2px);
+    text-decoration: none;
+}
+
+p, h1 {
+    margin-bottom: 6px;
+}
+
+#header {
+    text-align: center;
+    margin-bottom: 30px;   
+}
+
+#header h1 {
+    font-size: 3em;
+}
+
+#header p {
+    font-size: 1.3em;
+}
+
+main {
+    max-width: 1024px;
+    margin: auto;
+}
+
+main p {
+    font-size: 1.2em;
+}
+
+main li {
+    font-size: 1.1em;
+}
+
+input[type=file] {
+    margin-bottom: 10px;
+}
+
+#result pre {
+    background-color: var(--dark-color);
+}

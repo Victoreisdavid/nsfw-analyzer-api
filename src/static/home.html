@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>NSFW Analyzer</title>
+
+        <meta name="author" content="Victor Reis David" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="/static/style.css" />
+    </head>
+    <body>
+        <nav>
+            <div id="logo">
+                NSFW <span id="orange">Analyzer</span>
+            </div>
+            <a href="/how-to-use">Como usar a API</a>
+        </nav>
+        <header id="header">
+            <h1>NSFW Analyzer</h1>
+            <p>API Grátis de análise de imagens</p>
+        </header>
+        <main>
+            <h1>Analise alguma imagem:</h1> <br />
+            <input type="file" accept="image/jpeg, image/png" name="image" />
+            <span id="result"></span>
+        </main>        
+    </body>
+    <script>
+        const input = document.querySelector("input[type=file]")
+        input.addEventListener("input", () => {
+            const image = document.querySelector("input[type=file]").files[0]
+            const form = new FormData()
+
+            form.append("file", image, "form")
+
+            fetch("/api/predict", {
+                method: "POST",
+                body: form
+            }).then(res => res.json().then(result => {
+                const result_div = document.querySelector("#result")
+                result_div.innerHTML = ""
+                const pre = document.createElement("pre")
+                pre.innerHTML = JSON.stringify(result, null, 4)
+                result_div.append(pre)
+            }))
+        })
+    </script>
+</html>

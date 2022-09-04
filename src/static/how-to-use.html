@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>NSFW Analyzer</title>
+
+        <meta name="author" content="Victor Reis David" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="/static/style.css" />
+    </head>
+    <body>
+        <nav>
+            <div id="logo">
+                NSFW <span id="orange">Analyzer</span>
+            </div>
+            <a href="/how-to-use">Como usar a API</a>
+        </nav>
+        <header id="header">
+            <h1>NSFW Analyzer</h1>
+            <p>Usar a API é simples e rápido.</p>
+        </header>
+        <main>
+            <h1>Como fazer as requests?</h1>
+            <p>As requests devem ser feita com o método POST em <strong>/api/predict</strong> enviando um <strong>multipart/form-data</strong>.</p>
+            <ul>
+                <li>O formato de arquivo deve ser <strong>image/jpeg</strong> ou <strong>image/png</strong></li>
+                <li>O nome do field da imagem DEVE SER <strong>image</strong></li>
+                <li>Não pode exceder 10MB</li>
+            </ul>
+            <h1>Suporte a gifs...?</h1>
+            <p>Por enquanto não há suporte para gifs, mas futuramente pode ter.</p>
+        </main>
+    </body>
+</html>
